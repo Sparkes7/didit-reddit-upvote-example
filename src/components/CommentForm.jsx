@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { useFormState } from "react-dom";
 import { CommentFormButton } from "./CommentFormButton";
+import Tiptap from "./Tiptap";
 
 export function CommentForm({ postId, parentCommentId }) {
   const [state, dispatch] = useFormState(saveComment, {
@@ -33,6 +34,7 @@ export function CommentForm({ postId, parentCommentId }) {
               className="bg-zinc-200 p-3 rounded"
               placeholder="Type your comment..."
             />
+            {/* <Tiptap /> not fully implemented */}
             <CommentFormButton />
           </form>
         </>
