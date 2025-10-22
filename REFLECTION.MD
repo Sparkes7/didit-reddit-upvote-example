@@ -12,6 +12,12 @@
 
 ✅ Stop a user from voting more than once - This logic is already implemented
 
+## Dynamic Metadata
+
+To get dynamic metadata I knew that we needed to use a function to generate new metadata for the page, but I couldn't remember the exact steps. To resolve this, I checked out the NextJS documentation and found the appropriate page to follow.
+
+I wanted the title of the post as the page title, so to do this, I queried the database to `SELECT` the `title` of the post where the `id` matched the `params.postId` of the route.
+
 ## Error page
 
 The codebase already throws an error to state that voting cannot happen when the user is not logged in. To handle this error better, I created an `error.js` page in the `/app` route to handle the error. To do this, I first ensured that the file had the `"use client"` directive as errors are client sided, and used the `{error}` parameter to display the bespoke error thrown from the existing code using `{error.message}`.
