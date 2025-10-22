@@ -6,15 +6,16 @@ import { POSTS_PER_PAGE } from "@/config";
 
 export async function PostList({ currentPage = 1 }) {
   const { rows: posts } =
-    await db.query(`SELECT posts.id, posts.title, posts.body, posts.created_at, users.name, 
+    await db.query(`SELECT posts.id, posts.title, posts.body, posts.created_at, users.name, users.id AS userid,
     COALESCE(SUM(votes.vote), 0) AS vote_total
      FROM posts
      JOIN users ON posts.user_id = users.id
      LEFT JOIN votes ON votes.post_id = posts.id
-     GROUP BY posts.id, users.name
+     GROUP BY posts.id, users.name, users.id
      ORDER BY vote_total DESC
      LIMIT ${POSTS_PER_PAGE}
      OFFSET ${POSTS_PER_PAGE * (currentPage - 1)}`);
+  console.log(posts);
 
   return (
     <>
@@ -25,14 +26,22 @@ export async function PostList({ currentPage = 1 }) {
             className=" py-4 flex space-x-6 hover:bg-zinc-200 rounded-lg"
           >
             <Vote postId={post.id} votes={post.vote_total} />
-            <div>
+            <div className="flex flex-col">
               <Link
                 href={`/post/${post.id}`}
                 className="text-3xl hover:text-pink-500"
               >
                 {post.title}
               </Link>
-              <p className="text-zinc-700">posted by {post.name}</p>
+              <p>
+                Posted by:
+                <Link
+                  href={`/user/${post.userid}`}
+                  className="text-zinc-700 hover:underline"
+                >
+                  {post.name}
+                </Link>
+              </p>
             </div>
           </li>
         ))}
