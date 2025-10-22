@@ -7,8 +7,14 @@
 ## Stretch
 
 ✅ Dynamic Metadata to make page title the post title
+
 ✅ Error page to handle the error when attempting to vote while not logged in
+
 ✅ Stop a user from voting more than once - This logic is already implemented
+
+## Error page
+
+The codebase already throws an error to state that voting cannot happen when the user is not logged in. To handle this error better, I created an `error.js` page in the `/app` route to handle the error. To do this, I first ensured that the file had the `"use client"` directive as errors are client sided, and used the `{error}` parameter to display the bespoke error thrown from the existing code using `{error.message}`.
 
 ## Stop a user from voting multiple times
 
