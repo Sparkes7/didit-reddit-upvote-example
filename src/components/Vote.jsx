@@ -45,7 +45,6 @@ async function handleVote(userId, postId, newVote) {
 
 export async function Vote({ postId, votes }) {
   const session = await auth();
-  console.log(session);
   const existingVote = await getExistingVote(session?.user?.id, postId);
 
   async function upvote() {
